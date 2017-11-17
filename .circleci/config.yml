@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:carbon
+    working_directory: ~/assign-in-comment
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - yarn-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: yarn-{{ checksum "yarn.lock" }}
+      - run: yarn test --coverage
+      - run: bash <(curl -s https://codecov.io/bash)
