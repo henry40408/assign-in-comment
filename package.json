@@ -1,8 +1,8 @@
 {
   "name": "assign-in-comment",
   "version": "1.0.0",
-  "description": "",
-  "author": "Heng-Yi Wu <@henry40408> (https://github.com/henry40408/assign-in-comment)",
+  "description": "Probot that automatically assigns members from comments",
+  "author": "Heng-Yi Wu <@henry40408>",
   "license": "MIT",
   "repository": "https://github.com/henry40408/assign-in-comment.git",
   "scripts": {
