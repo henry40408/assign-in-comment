@@ -4,8 +4,6 @@
 
 > directly assign members in issue or pull request description
 
-![](assets/screenshot.gif)
-
 ## Setup
 
 ```bash
@@ -14,6 +12,15 @@ $ npm start # Run the bot
 ```
 
 See [docs/deploy.md](docs/deploy.md) if you would like to run your own instance of this app.
+
+## How to Use
+
+1. Open a new pull request or edit an existing pull request.
+2. Type `/assign @user1 @user2`, **do not prepend or append anything to the line**.
+3. Submit or save the pull request.
+4. `user1` and `user2` would be assigned to the pull request after a while.
+
+The procedure also works for the issues.
 
 ## Configuration
 
