@@ -1,48 +1,50 @@
-const { chain, concat } = require('lodash')
-
-const pattern = /^assign\s+((\s*(?:@\w+))*)$/
+let { chain, concat, startsWith } = require('lodash')
 
 module.exports = robot => {
   robot.on('pull_request.opened', context => assignInComment(robot, context))
   robot.on('pull_request.edited', context => assignInComment(robot, context))
 }
 
+function log (robot, message) {
+  return robot.log(`[assign-in-comment] ${message}`)
+}
+
 async function assignInComment (robot, context) {
-  const { event, payload: { action }, github } = context
-  robot.log(`responds to ${event}.${action}`)
+  let { event, payload: { action }, github } = context
+  log(robot, `responds to ${event}.${action}`)
 
-  const issue = context.issue()
-  const pullRequest = await github.pullRequests.get(issue)
+  let issue = context.issue()
+  let pullRequest = await github.pullRequests.get(issue)
 
-  const { assignees, body } = pullRequest.data
-  const newAssignees = extractAssignees(assignees, body)
+  let { assignees, body } = pullRequest.data
+  let newAssignees = extractAssignees(assignees, body)
 
-  const assigneeList = newAssignees.join(', ')
-  const { owner, repo, number } = issue
-  robot.log(`assign [${assigneeList}] to ${owner}/${repo}#${number}`)
+  let assigneeList = newAssignees.join(', ')
+  let { owner, repo, number } = issue
+  log(robot, `assign [${assigneeList}] to ${owner}/${repo}#${number}`)
 
-  const params = context.issue({ assignees: newAssignees })
+  let params = context.issue({ assignees: newAssignees })
   return github.issues.addAssigneesToIssue(params)
 }
 
 module.exports.assignInComment = assignInComment
 
 function extractAssignees (assignees, body) {
-  const lines = body.split(/\n/).map(line => line.trim())
+  let lines = body.split(/\n/).map(line => line.trim())
 
   return chain(lines)
     .reduce((acc, line) => {
-      const matches = pattern.exec(line)
-
-      if (matches && matches.length >= 2) {
-        const usernames = matches[1]
-          .split(/\s+/)
-          .map(username => username.replace(/^@/, ''))
-
-        return concat(acc, usernames)
+      if (!startsWith(line, '/assign')) {
+        return acc
       }
 
-      return acc
+      let usernames = line
+        .replace(/^\/assign\s+/, '')
+        .trim()
+        .split(/\s+/)
+        .map(username => username.replace(/^@/, ''))
+
+      return concat(acc, usernames)
     }, [])
     .union(assignees)
     .uniq()
