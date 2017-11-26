@@ -1,6 +1,10 @@
 # assign-in-comment
 
-[![CircleCI](https://circleci.com/gh/henry40408/assign-in-comment.svg?style=shield)](https://circleci.com/gh/henry40408/assign-in-comment) [![codecov](https://codecov.io/gh/henry40408/assign-in-comment/branch/master/graph/badge.svg)](https://codecov.io/gh/henry40408/assign-in-comment) [![GitHub release](https://img.shields.io/github/release/henry40408/assign-in-comment.svg)](https://github.com/henry40408/assign-in-comment/releases) [![GitHub license](https://img.shields.io/github/license/henry40408/assign-in-comment.svg)](https://github.com/henry40408/assign-in-comment/blob/master/LICENSE)
+[![CircleCI](https://circleci.com/gh/henry40408/assign-in-comment.svg?style=shield)](https://circleci.com/gh/henry40408/assign-in-comment)
+[![codecov](https://codecov.io/gh/henry40408/assign-in-comment/branch/master/graph/badge.svg)](https://codecov.io/gh/henry40408/assign-in-comment)
+[![GitHub release](https://img.shields.io/github/release/henry40408/assign-in-comment.svg)](https://github.com/henry40408/assign-in-comment/releases)
+[![GitHub license](https://img.shields.io/github/license/henry40408/assign-in-comment.svg)](https://github.com/henry40408/assign-in-comment/blob/master/LICENSE)
+![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
 
 > directly assign members in issue or pull request description
 
